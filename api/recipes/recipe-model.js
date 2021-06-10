@@ -20,8 +20,16 @@ async function getRecipeByID(id) {
 		.where('r.recipe_id', id)
 		.orderBy('s.step_number', 'asc');
 
-	console.log('RECIPE: ', recipe);
-	return recipe;
+	return {
+		recipe_name: recipe[0].recipe_name,
+		steps: recipe.map(step => {
+			return {
+				step_number: step.step_number,
+				step_instructions: step.step_text,
+				ingredients: step.ingredient_name
+			};
+		})
+	};
 	//     SELECT r.recipe_name, s.step_number, s.step_text, i.ingredient_name, si.quantity, r.date_created
 	// FROM recipes AS r
 	// LEFT JOIN steps as s
