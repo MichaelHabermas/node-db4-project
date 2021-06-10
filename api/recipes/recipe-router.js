@@ -1,8 +1,7 @@
 const express = require('express');
-// const { validateAction } = require('../middleware/middleware');
+const { validateRecipeID } = require('./recipe-middleware');
 
 const Recipes = require('./recipe-model');
-
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
@@ -11,6 +10,10 @@ router.get('/', (req, res, next) => {
 			res.json(recipes);
 		})
 		.catch(next);
+});
+
+router.get('/:id', validateRecipeID, (req, res, next) => {
+	res.status(200).json(req.recipe);
 });
 
 module.exports = router;
