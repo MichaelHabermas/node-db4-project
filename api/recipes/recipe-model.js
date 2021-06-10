@@ -1,9 +1,9 @@
 const db = require('../../data/db-config');
 
-function getAll() {
+function getRecipies() {
 	// return db('recipies');
 }
 
 module.exports = {
-	getAll
+	getRecipies
 };
