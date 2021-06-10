@@ -15,6 +15,8 @@ async function getRecipeByID(id) {
 			's.step_number',
 			's.step_text',
 			'i.ingredient_name',
+			'i.ingredient_id',
+			'si.quantity',
 			'si.quantity',
 			'r.date_created'
 		)
@@ -29,7 +31,11 @@ async function getRecipeByID(id) {
 			return {
 				step_number: step.step_number,
 				step_instructions: step.step_text,
-				ingredients: step.ingredient_name
+				ingredients: {
+					ingredient_name: step.ingredient_name,
+					ingredient_id: step.ingredient_id,
+					quantity: step.quantity
+				}
 			};
 		})
 	};
