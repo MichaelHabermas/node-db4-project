@@ -10,6 +10,7 @@ async function getRecipeByID(id) {
 		.leftJoin('steps-ingredients as si', 'si.step_id', 's.step_id')
 		.leftJoin('ingredients as i', 'i.ingredient_id', 'si.ingredient_id')
 		.select(
+			'r.recipe_id',
 			'r.recipe_name',
 			's.step_number',
 			's.step_text',
@@ -21,7 +22,9 @@ async function getRecipeByID(id) {
 		.orderBy('s.step_number', 'asc');
 
 	return {
+		recipe_id: recipe[0].recipe_id,
 		recipe_name: recipe[0].recipe_name,
+		created: recipe[0].date_created,
 		steps: recipe.map(step => {
 			return {
 				step_number: step.step_number,
@@ -30,15 +33,6 @@ async function getRecipeByID(id) {
 			};
 		})
 	};
-	//     SELECT r.recipe_name, s.step_number, s.step_text, i.ingredient_name, si.quantity, r.date_created
-	// FROM recipes AS r
-	// LEFT JOIN steps as s
-	//     ON r.recipe_id = s.recipe_id
-	// LEFT JOIN [steps-ingredients] as si
-	//     ON si.step_id = s.step_id
-	// LEFT JOIN ingredients as i
-	//     ON i.ingredient_id = si.ingredient_id
-	// WHERE r.recipe_id = 3;
 }
 
 module.exports = {
