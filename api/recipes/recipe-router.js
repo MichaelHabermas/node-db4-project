@@ -6,7 +6,11 @@ const Recipes = require('./recipe-model');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-	console.log('working');
+	Recipes.getRecipes()
+		.then(recipes => {
+			res.json(recipes);
+		})
+		.catch(next);
 });
 
 module.exports = router;
