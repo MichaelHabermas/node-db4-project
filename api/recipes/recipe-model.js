@@ -41,7 +41,17 @@ async function getRecipeByID(id) {
 	};
 }
 
+function createRecipe() {
+	return db('recipes');
+}
+
+function deleteRecipe() {
+	return db('recipes');
+}
+
 module.exports = {
 	getRecipes,
-	getRecipeByID
+	getRecipeByID,
+	createRecipe,
+	deleteRecipe
 };

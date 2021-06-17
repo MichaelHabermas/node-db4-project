@@ -7,8 +7,11 @@ server.use(express.json());
 server.use('/api/recipes', recipesRouter);
 server.use(logger);
 
+server.get('/', (req, res) => {
+	res.status(200).json({ api: 'up!' });
+});
+
 server.use((err, req, res, next) => {
-	console.log('err handling middleware kicking in!', err.message);
 	res.status(err.status || 500).json({
 		custom: 'something exploded inside the app',
 		message: err.message,
